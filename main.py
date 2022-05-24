@@ -1,4 +1,6 @@
 #I have to put the actual process names later. Cant do it rn as I'm not on my desktop.
+#619 861 2322
+
 
 try:
   from colorama import *
