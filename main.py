@@ -54,7 +54,6 @@ def check(processName): #thank u stackoverflow
             if processName.lower() in proc.name().lower():
                 return True
         except(psutil.NoSuchProcess):
-            print("Unknown Error")
             return False
 
 def EAC():
