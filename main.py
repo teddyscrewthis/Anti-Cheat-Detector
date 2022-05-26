@@ -1,7 +1,3 @@
-#I have to put the actual process names later. Cant do it rn as I'm not on my desktop.
-#619 861 2322
-
-
 try:
   from colorama import *
   import psutil
@@ -12,80 +8,92 @@ except ModuleNotFoundError:
   os.system("pip3 install psutil")
   os.system("pip3 install colorama")
   
+#----------------------------------Global program functions-----------------------------------------------
+def exit():
+    os.system("cls") #clears console
+    sys.exit()
+
+def clear_screen():
+    os.system("cls")
+
+#----------------------------------Interface Functions-----------------------------------------------
+
 def app_logo():
   ascii_menu = """
 ▄▀█ █▄░█ ▀█▀ █ ▄▄ █▀▀ █░█ █▀▀ ▄▀█ ▀█▀   █▀▄ █▀▀ ▀█▀ █▀▀ █▀▀ ▀█▀ █▀█ █▀█
 █▀█ █░▀█ ░█░ █ ░░ █▄▄ █▀█ ██▄ █▀█ ░█░   █▄▀ ██▄ ░█░ ██▄ █▄▄ ░█░ █▄█ █▀▄"""
-  print(ascii_menu)
- 
+  print(Fore.BLUE + ascii_menu + Fore.RESET)
+  print(Fore.BLUE + "                          github -> teddyscrewthis" + Fore.RESET)
+  print("")
+  
+
 
 def menu():
   print("[0] Exit")
   print("[1] Easy Anti-Cheat")
   print("[2] Battleye")
-  print("[3] Richote")
-  print("[4] Help")
-  
-  options = inout("Select Anti-Cheat to Check ---> ")
-  
+  print("")
+
+  option = input("Enter number of process you want to check ---> ")
+  if option == "0":
+    return exit()
+  if option == "1":
+      EAC()
+  elif option == "2":
+      Battleye()  
 
 def main_menu():
-  os.system("cls")
-  app_logo()
-  menu()
+    app_logo()
+    menu()
   
-def getService(name):
+#----------------------------------Main function-----------------------------------------------
 
-    service = None
-    try:
-        service = psutil.win_service_get(name)
-        service = service.as_dict()
-    except Exception as ex:
-        print(str(ex))
-    return service
+def check(processName): #thank u stackoverflow
+  for proc in psutil.process_iter():
+        try:
+            if processName.lower() in proc.name().lower():
+                return True
+        except(psutil.NoSuchProcess):
+            print("Unknown Error")
+            return False
 
 def EAC():
-  
-  service = getService('EasyAntiCheat')
-  print(service)
 
-  if service:
-      print(Fore.GREEN + "Easy Anti-Cheat is running" + Fore.RESET)
-      input("Press any key to continue ---> ")
-      return main_menu()
-  else:
-      print(Fore.RED + "Easy Anti-Cheat is  not running")
-      input("Press any key to continue ---> ")
-      return main_menu()
-    
-def BATTLEYE():
-  
-  service = getService('Battleye')
-  print(service)
+    clear_screen()
+    app_logo()
 
-  if service:
-      print(Fore.GREEN + "Battleye is running" + Fore.RESET)
-      input("Press any key to continue ---> ")
-      return main_menu()
-  else:
-      print(Fore.RED + "Battleye is  not running")
-      input("Press any key to continue ---> ")
-      return main_menu()
-    
-def RICOCHET():
-  
-  service = getService('Ricochet')
-  print(service)
+    proc = check('EasyAntiCheat_EOS')
 
-  if service:
-      print(Fore.GREEN + "Ricochet is running" + Fore.RESET)
+    if proc == None:
+      print(Fore.RED + "[!] Easy Anti-Cheat is not running [!]" + Fore.RESET)
       input("Press any key to continue ---> ")
+      clear_screen()
       return main_menu()
-  else:
-      print(Fore.RED + "Ricochet is  not running")
+      
+    elif proc == True:
+      print(Fore.GREEN + "[!] Easy Anti-Cheat is running [!]" + Fore.RESET)
       input("Press any key to continue ---> ")
+      clear_screen()
       return main_menu()
-    
-if '__name__' == '__main__':
-  main_menu()
-  
+
+def Battleye():
+
+    clear_screen()
+    app_logo()
+
+    proc = check('BEService')
+
+    if proc == None:
+        print(Fore.RED + "[!] Battleye is not running [!]" + Fore.RESET)
+        input("Press any key to continue ---> ")
+        clear_screen()
+        return main_menu()
+      
+    elif proc == True:
+        print(Fore.GREEN + "[!] Battleye is running [!]" + Fore.RESET)
+        input("Press any key to continue ---> ")
+        clear_screen()
+        return main_menu()
+
+if __name__ == "__main__":
+    main_menu()
