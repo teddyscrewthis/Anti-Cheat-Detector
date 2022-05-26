@@ -1,5 +1,6 @@
-# Anti-Cheat-Detector
-A piece of software that is used to check if any anti-cheat is running. Useful if you're trying to do no no things in games.
+# About
+This program is used to check if certain anti-cheat's are running. (Might be helpful if you want to make no no things in games)
+Windows only, adding more soon.
 
 # Support
   - Easy Anti-Cheat (EAC)
