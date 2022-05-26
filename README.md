@@ -7,4 +7,4 @@ A piece of software that is used to check if any anti-cheat is running. Useful i
 
 # Future Support
   - Ricochet
-  Message me if you have any recommendations on other anti-cheats to add. 
+  - Message me if you have any recommendations on other anti-cheats to add. 
